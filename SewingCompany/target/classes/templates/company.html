@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+    <head>
+        <title>Companies</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: centre;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <a th:href="@{/company/add-new-company}">Add new company</a>
+        <a th:href="@{/}">Go to main page</a>
+
+        <div th:if="${#lists.isEmpty(CompaniesList)}">
+            <p class="nothing-added">There are no records in the database</p>
+        </div>
+
+        <div class="box">
+            <div th:if="${not #lists.isEmpty(CompaniesList)}">
+                <div class="scrollbar">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Owner</th>
+                            <th>Bulstat</th>
+                            <th>Address</th>
+                            <th>Employees</th>
+                            <th>Details made by company</th>
+                        </tr>
+                        <tr th:each="company : ${CompaniesList}">
+                            <td th:text="${company.id}"></td>
+                            <td th:text="${company.name}"></td>
+                            <td th:text="${company.owner}"></td>
+                            <td th:text="${company.bulstat}"></td>
+                            <td th:text="${company.address}"></td>
+                            <td th:text="${company.employees}"></td>
+                            <td th:text="${company.detailsMadeByCompany()}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

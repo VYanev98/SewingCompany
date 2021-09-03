@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+    <head>
+        <title>Companies</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: centre;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <a th:href="@{/detail/add-new-detail}">Add new detail</a>
+        <a th:href="@{/}">Go to main page</a>
+
+        <div th:if="${#lists.isEmpty(DetailsList)}">
+            <p class="nothing-added">There are no records in the database</p>
+        </div>
+
+        <div class="box">
+            <div th:if="${not #lists.isEmpty(DetailsList)}">
+                <div class="scrollbar">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Detail type</th>
+                            <th>Detail color</th>
+                            <th>Detail material costs</th>
+                            <th>Detail hours to make</th>
+                            <th>Detail made by employee</th>
+                            <th>Detail sell price</th>
+                        </tr>
+                        <tr th:each="detail : ${DetailsList}">
+                            <td th:text="${detail.id}"></td>
+                            <td th:text="${detail.detailType}"></td>
+                            <td th:text="${detail.detailColor}"></td>
+                            <td th:text="${detail.materialCosts}"></td>
+                            <td th:text="${detail.hoursToMake}"></td>
+                            <td th:text="${detail.employee.getFirstName()}"></td>
+                            <td th:text="${detail.detailSellPrice}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

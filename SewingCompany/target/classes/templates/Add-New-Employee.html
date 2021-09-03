@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+    <head>
+        <title>Add new employee</title>
+    </head>
+    <body>
+        <label>Please add employee</label>
+        <form action="#" th:action="@{/employee/add-new-employee}" th:object="${employee}" method="post">
+            <p>Employee first name</p>
+            <div>
+                <input type="text" th:field="*{firstName}"/>
+            </div>
+
+            <p>Employee last name</p>
+            <div>
+                <input type="text" th:field="*{lastName}"/>
+            </div>
+
+            <p>Company name</p>
+            <select th:field="*{company}">
+                <option th:each="company : ${CompaniesList}"
+                        th:value="${company.id}"
+                        th:text="${company.name}">
+                </option>
+            </select>
+
+            <p>Employee type</p>
+            <select th:field="*{type}">
+                <option th:each="type : ${TypesList}"
+                        th:value="${type.id}"
+                        th:text="${type.employeeType}">
+                </option>
+            </select>
+
+            <p>
+                <button type="submit">
+                    Create
+                </button>
+            </p>
+        </form>
+    </body>
+</html>

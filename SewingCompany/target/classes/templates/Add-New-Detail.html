@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+    <head>
+        <title>Add new detail</title>
+    </head>
+    <body>
+        <label>Please add detail</label>
+        <form action="#" th:action="@{/detail/add-new-detail}" th:object="${detail}" method="post">
+            <p>Detail type</p>
+            <div>
+                <input type="text" th:field="*{detailType}"/>
+            </div>
+
+            <p>Detail color</p>
+            <div>
+                <input type="text" th:field="*{detailColor}"/>
+            </div>
+
+            <p>Detail material costs</p>
+            <div>
+                <input type="text" th:field="*{materialCosts}"/>
+            </div>
+
+            <p>Detail Hours to make</p>
+            <div>
+                <input type="text" th:field="*{hoursToMake}"/>
+            </div>
+
+            <p>Detail sell price</p>
+            <div>
+                <input type="text" th:field="*{detailSellPrice}"/>
+            </div>
+
+            <p>Detail made by</p>
+            <select th:field="*{employee}">
+                <option th:each="employee : ${EmployeesList}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstName}">
+                </option>
+            </select>
+
+            <p>
+                <button type="submit">
+                    Create
+                </button>
+            </p>
+        </form>
+    </body>
+</html>

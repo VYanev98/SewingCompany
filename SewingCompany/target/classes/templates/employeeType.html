@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+    <head>
+        <title>Employee types</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: centre;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <a th:href="@{/employee/add-new-employeeType}">Add new employee types</a>
+        <a th:href="@{/}">Go to main page</a>
+        <a th:href="@{/employee}">Go to employee page</a>
+
+        <div th:if="${#lists.isEmpty(EmployeeTypesList)}">
+            <p class="nothing-added">There are no records in the database</p>
+        </div>
+
+        <div class="box">
+            <div th:if="${not #lists.isEmpty(EmployeeTypesList)}">
+                <div class="scrollbar">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Salary per hour</th>
+                            <th>Max details</th>
+                        </tr>
+                            <tr th:each="employeeType : ${EmployeeTypesList}">
+                            <td th:text="${employeeType.id}"></td>
+                            <td th:text="${employeeType.employeeType}"></td>
+                            <td th:text="${employeeType.SalaryPerHour}"></td>
+                            <td th:text="${employeeType.maxDetails}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

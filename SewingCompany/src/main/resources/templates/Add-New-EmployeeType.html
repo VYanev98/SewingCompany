@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+    <head>
+        <title>Add new employee type</title>
+    </head>
+    <body>
+        <label>Please add employee type</label>
+        <form action="#" th:action="@{/employee/add-new-employeeType}" th:object="${typeEmployee}" method="post">
+            <p>Type</p>
+            <div>
+                <input type="text" th:field="*{employeeType}"/>
+            </div>
+
+            <p>Salary per hour</p>
+            <div>
+                <input type="text" th:field="*{salaryPerHour}"/>
+            </div>
+
+            <p>Max details</p>
+            <div>
+                <input type="text" th:field="*{maxDetails}"/>
+            </div>
+
+            <p>
+                <button type="submit">
+                    Create
+                </button>
+            </p>
+        </form>
+    </body>
+</html>

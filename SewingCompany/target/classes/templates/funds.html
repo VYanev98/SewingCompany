@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+    <head>
+        <title>Funds</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: centre;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <a th:href="@{/}">Go to main page</a>
+
+        <div th:if="${#lists.isEmpty(FundsList)}">
+            <p class="nothing-added">There are no records in the database</p>
+        </div>
+
+        <div class="box">
+            <div th:if="${not #lists.isEmpty(FundsList)}">
+                <div class="scrollbar">
+                    <table>
+                        <tr>
+                            <th>Company</th>
+                            <th>Profit</th>
+                            <th>Loss</th>
+                            <th>Income</th>
+                            <th>Net income</th>
+                        </tr>
+                        <tr th:each="funds : ${FundsList}">
+                            <td th:text="${funds.company.getName()}"></td>
+                            <td th:text="${funds.profit}"></td>
+                            <td th:text="${funds.loss}"></td>
+                            <td th:text="${funds.income}"></td>
+                            <td th:text="${funds.netIncome}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

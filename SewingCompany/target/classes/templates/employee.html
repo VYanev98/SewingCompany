@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org/"
+>
+    <head>
+        <title>Employees</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: centre;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <a th:href="@{/employee/add-new-employee}">Add new employee</a>
+        <a th:href="@{/employeeType}">See all employee types</a>
+        <a th:href="@{/}">Go to main page</a>
+
+        <div th:if="${#lists.isEmpty(EmployeesList)}">
+            <p class="nothing-added">There are no records in the database</p>
+        </div>
+
+        <div class="box">
+            <div th:if="${not #lists.isEmpty(EmployeesList)}">
+                <div class="scrollbar">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Company name</th>
+                            <th>Employee type</th>
+                            <th>Details made by employee</th>
+                        </tr>
+                            <tr th:each="employee : ${EmployeesList}">
+                            <td th:text="${employee.id}"></td>
+                            <td th:text="${employee.firstName}"></td>
+                            <td th:text="${employee.lastName}"></td>
+                            <td th:text="${employee.company.getName()}"></td>
+                            <td th:text="${employee.type.getEmployeeType()}"></td>
+                            <td th:text="${employee.detailsMadeByEmployee()}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
